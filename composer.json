@@ -1,0 +1,15 @@
+{
+  "name": "matheusdev/oo-the-fato",
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Matheus Henrique",
+      "email": "matheushnt.dev@gmail.com"
+    }
+  ],
+  "require": {}
+}
