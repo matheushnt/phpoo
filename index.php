@@ -2,11 +2,12 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use src\classes\Product;
+use src\classes\ContaBancaria;
 
-$ps5 = new Product;
-$ps5->name = 'PlayStation 5';
-$ps5->price = 2899.99;
-$ps5->stock = 4;
-
-dump($ps5);
+$contaBancaria = new ContaBancaria('Pedro');
+dump($contaBancaria->consultarSaldo());
+dump($contaBancaria->depositar(345.89));
+dump($contaBancaria->consultarSaldo());
+dump($contaBancaria->sacar(300));
+dump($contaBancaria->consultarSaldo());
+dump($contaBancaria->dados());
