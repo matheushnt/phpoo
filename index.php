@@ -2,9 +2,10 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use src\classes\Retangulo;
+use src\classes\Carro;
 
-$retangulo = new Retangulo(12, 7);
+$corolla = new Carro(2020);
+$corolla->marca = 'Toyota';
+$corolla->nome = 'Corolla';
 
-dump($retangulo->area());
-dump($retangulo->perimetro());
+dump($corolla);
