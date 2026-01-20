@@ -2,6 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use src\classes\Usuario;
+use src\classes\Retangulo;
 
-$usuario = new Usuario('Joaquim', 18, 'joaquim@mail.com',);
+$retangulo = new Retangulo(12, 7);
+
+dump($retangulo->area());
+dump($retangulo->perimetro());
