@@ -1,11 +1,12 @@
 <?php
 
+use src\classes\Pedido;
+
 require __DIR__ . '/vendor/autoload.php';
 
-use src\classes\Carro;
+$pedido = new Pedido;
+$pedido->adicionarItem(4000.0);
+$pedido->adicionarItem(6000.0);
+$pedido->adicionarItem(7000.0);
 
-$corolla = new Carro(2020);
-$corolla->marca = 'Toyota';
-$corolla->nome = 'Corolla';
-
-dump($corolla);
+dump($pedido->calcularTotal(420.80));
