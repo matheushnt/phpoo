@@ -1,10 +1,10 @@
 <?php
 
-use src\classes\Cachorro;
-use src\classes\Gato;
+use src\classes\Pessoa;
+use src\classes\Funcionario;
 
-$cachorro = new Cachorro('Rex', 2);
-dump($cachorro->emitirSom());
+$pessoa = new Pessoa(nome: 'Pedro', cpf: '12315853412',);
+dump($pessoa->dados());
 
-$gato = new Gato('Tiquinho', 1);
-dump($gato->emitirSom());
+$func = new Funcionario(nome: 'Joaquim', cpf: '12345678910', salario: 2679.90, cargo: 'Peão');
+dump($func->dados());
