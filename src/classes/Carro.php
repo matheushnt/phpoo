@@ -2,14 +2,16 @@
 
 namespace src\classes;
 
-class Carro
+class Carro extends VeiculoMotorizado
 {
-    public string $marca;
-    public string $nome;
-    private int $ano;
-
-    public function __construct(int $ano)
-    {
-        $this->ano = $ano;
+    public function __construct(
+        string $cor,
+        int $ano,
+        int $potenciaMotor,
+        float $combustivel,
+        protected int $numeroPortas,
+        protected string $tipoCarroceria
+    ) {
+        parent::__construct($cor, $ano, $potenciaMotor, $combustivel);
     }
 }
