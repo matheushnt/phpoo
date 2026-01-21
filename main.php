@@ -1,14 +1,14 @@
 <?php
 
-use src\classes\Carro;
-use src\classes\Veiculo;
-use src\classes\VeiculoMotorizado;
+use src\classes\Circulo;
+use src\classes\Quadrado;
+use src\classes\Triangulo;
 
-$veiculo = new Veiculo('vermelho', 2026);
-dump($veiculo);
+$triangulo = new Triangulo(3, 2);
+dump($triangulo->calcularArea());
 
-$veiculoMotorizado = new VeiculoMotorizado('verde', 2027, 300, 2.0);
-dump($veiculoMotorizado);
+$quadrado = new Quadrado(5);
+dump($quadrado->calcularArea());
 
-$carro = new Carro('azul', 2028, 800, 7.5, 2, 'coupé');
-dump($carro);
+$circulo = new Circulo(10);
+dump($circulo->calcularArea());
