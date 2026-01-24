@@ -4,11 +4,8 @@ use src\classes\Circulo;
 use src\classes\Quadrado;
 use src\classes\Triangulo;
 
-$triangulo = new Triangulo(3, 2);
-dump($triangulo->calcularArea());
+$formasGeometricas = [new Triangulo(3, 2), new Quadrado(5), new Circulo(10)];
 
-$quadrado = new Quadrado(5);
-dump($quadrado->calcularArea());
-
-$circulo = new Circulo(10);
-dump($circulo->calcularArea());
+foreach ($formasGeometricas as $formasGeometrica) {
+    dump($formasGeometrica->calcularArea());
+}
