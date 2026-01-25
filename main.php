@@ -1,11 +1,10 @@
 <?php
 
-use src\classes\Circulo;
-use src\classes\Quadrado;
-use src\classes\Triangulo;
+use src\classes\PagamentoCartao;
+use src\classes\PagamentoPix;
 
-$formasGeometricas = [new Triangulo(3, 2), new Quadrado(5), new Circulo(10)];
+// $pmtoCartao = new PagamentoCartao('1234567812345678', '123', '12/2026', 1239);
+// dump($pmtoCartao->processar());
 
-foreach ($formasGeometricas as $formasGeometrica) {
-    dump($formasGeometrica->calcularArea());
-}
+$pmtoPix = new PagamentoPix('+558540028922', 50);
+dump($pmtoPix->processar());
