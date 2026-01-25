@@ -1,10 +1,12 @@
 <?php
 
-use src\classes\PagamentoCartao;
-use src\classes\PagamentoPix;
+use src\classes\Email;
+use src\classes\Notificacao;
+use src\classes\SMS;
 
-// $pmtoCartao = new PagamentoCartao('1234567812345678', '123', '12/2026', 1239);
-// dump($pmtoCartao->processar());
+function executar(Notificacao $notificacao): void
+{
+    dump($notificacao->enviar());
+}
 
-$pmtoPix = new PagamentoPix('+558540028922', 50);
-dump($pmtoPix->processar());
+executar(new SMS('999999999', 'Suas férias começarão na segunda-feiraSuas férias começarão na segsmeçarão na segunda-feira'));
