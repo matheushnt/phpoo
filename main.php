@@ -1,12 +1,8 @@
 <?php
 
-use src\classes\Email;
-use src\classes\Notificacao;
-use src\classes\SMS;
+use src\classes\Contrato;
+use src\classes\Relatorio;
 
-function executar(Notificacao $notificacao): void
-{
-    dump($notificacao->enviar());
-}
+$contrato = new Contrato('Brinquedos', 'Hugo', ['Marcelo', 'Ana'], 2000, '06/2030', ['Cláusula 1', 'Cláusula 2', 'Cláusula 3']);
 
-executar(new SMS('999999999', 'Suas férias começarão na segunda-feiraSuas férias começarão na segsmeçarão na segunda-feira'));
+dump($contrato->gerarConteudo());
