@@ -1,22 +1,39 @@
 <?php
 
-use src\classes\RepositorioArquivo;
-use src\classes\RepositorioPostgreSQL;
+use src\classes\BluRay;
+use src\classes\MP3;
+use src\enums\MidiaFisicaCondicao;
+use src\enums\ResolucaoBluRay;
 
-$repo = new RepositorioPostgreSQL('usuarios');
-$repo->salvar(['nome' => 'Sr. Pablo Melo', 'email' => 'MariaEduarda92@yahoo.com']);
-$repo->salvar(['nome' => 'Hélio Melo', 'email' => 'Yago_Carvalho33@hotmail.com']);
-$repo->salvar(['nome' => 'Mércia Melo', 'email' => 'PedroHenrique.Moreira53@yahoo.com']);
-$repo->salvar(['nome' => 'Karla Xavier', 'email' => 'Luiza_Moreira@yahoo.com']);
-$repo->salvar(['nome' => 'Emanuel Carvalho', 'email' => 'Alice.Batista@yahoo.com']);
-$repo->salvar(['nome' => 'Sra. Natália Moreira', 'email' => 'Vicente.Braga@hotmail.com']);
-$repo->salvar(['nome' => 'Beatriz Silva', 'email' => 'Vctor_Xavier@bol.com.br']);
-$repo->salvar(['nome' => 'Vitor Batista', 'email' => 'Mrcia50@hotmail.com']);
-$repo->salvar(['nome' => 'Fabrício Melo', 'email' => 'Dalila56@gmail.com']);
-$repo->salvar(['nome' => 'Eduardo Costa', 'email' => 'Lavnia.Batista90@gmail.com']);
+$bluray = new BluRay(
+    'Vingadores: Guerra Infinita',
+    181,
+    '2018',
+    MidiaFisicaCondicao::Usada,
+    ResolucaoBluRay::UltraHD,
+    [
+        "DTS-HD Master Audio 7.1",
+        "Dolby TrueHD",
+        "Dolby Atmos",
+        "DTS:X"
+    ],
+);
 
-dump($repo->listar());
-dump($repo->buscar(3));
-dump($repo->atualizar(1, ['nome' => 'Dra. Benjamin Moreira', 'email' => 'Caio_Xavier32@hotmail.com']));
-dump($repo->listar());
-dump($repo->buscar(1));
+dump($bluray->informacoes());
+dump($bluray->reproduzir());
+dump($bluray->calcularValorRevenda());
+
+$mp3 = new MP3(
+    titulo: 'Bohemian Rhapsody',
+    duracao: 6,
+    ano: '1975',
+    formato: 'mp3',
+    artista: 'Queen',
+    album: 'A Night at the Opera',
+    bitrate: 320,
+    tamanhoMB: 2048
+);
+
+dump($mp3->reproduzir());
+dump($mp3->informacoes());
+dump("Tempo de download com 100Mbps: {$mp3->calcularTempoDownload(100)} segundos");
