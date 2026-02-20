@@ -1,4 +1,4 @@
-# OO The Fato
+# PHP OO
 
 Este repositório contém uma coletânea de exercícios práticos de Orientação a Objetos, abordando conceitos como classes, objetos, herança, abstração, encapsulamento e polimorfismo. Meu objetivo foi me aprofundar e aprimorar minhas habilidades em OO, aplicando esses conceitos em exemplos concretos.
 
