@@ -1,7 +1,9 @@
 <?php
 
-use src\classes\NotaFiscal;
+use src\classes\Orcamento;
+use src\enums\OrcamentoStatus;
 
-$notaFiscal = new NotaFiscal('NF-123456', 'João da Carochinha', ['PS5' => 3389.99, 'Monitor Gamer LG' => 1789.99]);
+$orcamento = new Orcamento('123456', 'Pedro', ['PS5', 'Nintendo Switch 2'], 6289.99, '01/01/2027', OrcamentoStatus::Cancelado);
 
-var_dump($notaFiscal->imprimir());
+dump($orcamento->carregar());
+dump($orcamento->exportarPDF());
