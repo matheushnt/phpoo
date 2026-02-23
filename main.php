@@ -1,53 +1,43 @@
 <?php
 
-use src\classes\Admin;
-use src\classes\Cliente;
-use src\classes\Moderador;
+use src\classes\Fatura;
+use src\classes\Mensalidade;
+use src\classes\Multa;
+use src\executores\ExecutorPagamento;
 
 $objetivo = "
-    Objetivo: Entender que interfaces definem O QUE fazer (contrato)
-    e classes abstratas podem fornecer COMO fazer (implementação padrão),
-    além de forçar subclasses a implementar comportamentos específicos.
+    Usar interfaces como tipo de parâmetro (type hint) permitindo que funções trabalhem
+    com qualquer objeto que implemente o contrato, independente da classe concreta.
 ";
 
 $testes = [
-    "Faça login com credenciais corretas",
-    "Exiba as permissões",
-    "Verifique se está autenticado",
-    "Faça logout",
-    "Tente fazer login com senha errada",
+    "2 faturas",
+    "1 mensalidade",
+    "1 multa",
+    "Pague a primeira fatura",
+    "Processe TODAS as cobranças (incluindo a já paga)",
 ];
 
-echo str_pad(" Interface vs Classe Abstrata ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
+echo str_pad(" Tipo de Parâmetro com Interface ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
 
-$admin = new Admin("João", "admin@mail.com", "Admin@123",);
-$cliente = new Cliente("Jean", "cliente@mail.com", "Cliente@123", "123.456.789-10");
-$moderador = new Moderador("Jonas", "moderador@mail.com", "Moderador@123", "Suporte");
-
-dump($admin->login("admin@mail.com", "Admin@123"));
-dump($cliente->login("cliente@mail.com", "Cliente@123"));
-dump($moderador->login("moderador@mail.com", "Moderador@123"));
+$primeiraFatura = new Fatura("FAT-132435", "Ferdinando", 3589.99, "26/02/2026");
+$segundaFatura = new Fatura("FAT-152637", "Paula", 1239.99, "01/03/2026");
+$mensalidade = new Mensalidade("2026", "03", "Pereira", 2979.89);
+$multa = new Multa("MT-314253", "Depredação do patrimônio público", 679.89, "01/06/2026");
+$executor = new ExecutorPagamento($primeiraFatura);
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($admin->permissoes());
-dump($cliente->permissoes());
-dump($moderador->permissoes());
+dump($executor->executar());
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($admin->autenticado());
-dump($cliente->autenticado());
-dump($moderador->autenticado());
+$pagamentoPrimeiraFatura = new ExecutorPagamento($primeiraFatura)->executar();
+$pagamentoSegundaFatura = new ExecutorPagamento($segundaFatura)->executar();
+$pagamentoMensalidade = new ExecutorPagamento($mensalidade)->executar();
+$pagamentoMulta = new ExecutorPagamento($multa)->executar();
 
-echo str_repeat("=", 50) . PHP_EOL;
-
-dump($admin->logout());
-dump($cliente->logout());
-dump($moderador->logout());
-
-echo str_repeat("=", 50) . PHP_EOL;
-
-dump($admin->login("admin@mail.com", "Errado@123"));
-dump($cliente->login("cliente@mail.com", "Errado@123"));
-dump($moderador->login("moderador@mail.com", "Errado@123"));
+dump($pagamentoPrimeiraFatura);
+dump($pagamentoSegundaFatura);
+dump($pagamentoMensalidade);
+dump($pagamentoMulta);
