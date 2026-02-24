@@ -2,7 +2,7 @@
 
 Este repositório contém uma coletânea de exercícios práticos de Orientação a Objetos, abordando conceitos como classes, objetos, herança, abstração, encapsulamento e polimorfismo. Meu objetivo foi me aprofundar e aprimorar minhas habilidades em OO, aplicando esses conceitos em exemplos concretos.
 
-Não apliquei tópicos mais avançados como SOLID, Objects Calisthenics ou Design Patterns. O intuito era: consolidar a base✨.
+Não apliquei tópicos mais avançados com tanto afinco como SOLID, Objects Calisthenics ou Design Patterns. O intuito era: consolidar a base ✨.
 
 ## Estrutura do Repositório
 - `src/`: Contém as classes e enums utilizadas nos exercícios.
