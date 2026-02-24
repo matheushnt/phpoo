@@ -1,43 +1,60 @@
 <?php
 
-use src\classes\Fatura;
-use src\classes\Mensalidade;
-use src\classes\Multa;
-use src\executores\ExecutorPagamento;
+use src\classes\Estagiario;
+use src\classes\Freelancer;
+use src\classes\Funcionario;
+use src\classes\Voluntario;
+use src\enums\BatidaPonto;
 
 $objetivo = "
-    Usar interfaces como tipo de parâmetro (type hint) permitindo que funções trabalhem
-    com qualquer objeto que implemente o contrato, independente da classe concreta.
+    Entender o Interface Segregation Principle (ISP) - classes não devem ser forçadas a implementar
+    métodos que não usam. Interfaces pequenas e específicas são melhores que interfaces grandes e genéricas.
 ";
 
 $testes = [
-    "2 faturas",
-    "1 mensalidade",
-    "1 multa",
-    "Pague a primeira fatura",
-    "Processe TODAS as cobranças (incluindo a já paga)",
+    "1 Funcionário: Carlos (salário R$ 3000, 30 dias férias, 160h trabalhadas)",
+    "1 Freelancer: Ana (R$ 80/hora, trabalhou 120 horas no mês)",
+    "1 Voluntário: João (causa: Proteção Animal)",
+    "1 Estagiário: Maria (bolsa R$ 1000, 100h trabalhadas)",
+    "Para cada um, chame trabalhar()",
+    "Para os que recebem: mostre o salário",
+    "Para os que batem ponto: registre entrada e saída",
+    "Para os que tiram férias: tire 10 dias",
+    "Para os que recebem vale: mostre o valor",
 ];
 
-echo str_pad(" Tipo de Parâmetro com Interface ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
+echo str_pad("  Segregação de Interface  ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
 
-$primeiraFatura = new Fatura("FAT-132435", "Ferdinando", 3589.99, "26/02/2026");
-$segundaFatura = new Fatura("FAT-152637", "Paula", 1239.99, "01/03/2026");
-$mensalidade = new Mensalidade("2026", "03", "Pereira", 2979.89);
-$multa = new Multa("MT-314253", "Depredação do patrimônio público", 679.89, "01/06/2026");
-$executor = new ExecutorPagamento($primeiraFatura);
-
-echo str_repeat("=", 50) . PHP_EOL;
-
-dump($executor->executar());
+$func = new Funcionario(3000.0, "TI", 30, 160, "Pereira", "12345678910");
+$freelancer = new Freelancer("Ana", 80, 120);
+$voluntario = new Voluntario("João", "Proteção Animal");
+$estagiario = new Estagiario("Maria", 1000.0, 100);
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-$pagamentoPrimeiraFatura = new ExecutorPagamento($primeiraFatura)->executar();
-$pagamentoSegundaFatura = new ExecutorPagamento($segundaFatura)->executar();
-$pagamentoMensalidade = new ExecutorPagamento($mensalidade)->executar();
-$pagamentoMulta = new ExecutorPagamento($multa)->executar();
+dump($func->trabalhar());
+dump($freelancer->trabalhar());
+dump($voluntario->trabalhar());
+dump($estagiario->trabalhar());
 
-dump($pagamentoPrimeiraFatura);
-dump($pagamentoSegundaFatura);
-dump($pagamentoMensalidade);
-dump($pagamentoMulta);
+echo str_repeat("=", 50) . PHP_EOL;
+
+dump($func->receberSalario());
+dump($freelancer->receberSalario());
+dump($estagiario->receberSalario());
+
+echo str_repeat("=", 50) . PHP_EOL;
+
+dump($func->baterPonto(BatidaPonto::Entrada));
+dump($func->baterPonto(BatidaPonto::Saida));
+dump($estagiario->baterPonto(BatidaPonto::Entrada));
+dump($estagiario->baterPonto(BatidaPonto::Saida));
+
+echo str_repeat("=", 50) . PHP_EOL;
+
+dump($func->tirarFerias(10));
+
+echo str_repeat("=", 50) . PHP_EOL;
+
+dump($func->receberValeTransporte());
+dump($estagiario->receberValeTransporte());
