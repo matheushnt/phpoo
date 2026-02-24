@@ -5,7 +5,7 @@ Este repositório contém uma coletânea de exercícios práticos de Orientaçã
 Não apliquei tópicos mais avançados com tanto afinco como SOLID, Objects Calisthenics ou Design Patterns. O intuito era: consolidar a base ✨.
 
 ## Estrutura do Repositório
-- `src/`: Contém as classes e enums utilizadas nos exercícios.
+- `src/`: Contém as classes, interfaces e enums utilizadas nos exercícios.
 - `main.php`: Arquivo principal onde os objetos são instanciados e os métodos são chamados para demonstrar o funcionamento das classes.
 - `index.php`: Ponto de entrada para execução do código, onde o `main.php` é incluído.
 ## Como Usar
