@@ -1,60 +1,114 @@
 <?php
 
-use src\classes\Estagiario;
-use src\classes\Freelancer;
-use src\classes\Funcionario;
-use src\classes\Voluntario;
-use src\enums\BatidaPonto;
+use src\classes\CarroBase;
+use src\classes\Motor;
+use src\classes\Rodas;
+use src\classes\SistemaSom;
+use src\classes\Transmissao;
+use src\enums\TipoMotor;
+use src\enums\TipoRodas;
+use src\enums\TipoTransmissao;
 
 $objetivo = "
-    Entender o Interface Segregation Principle (ISP) - classes não devem ser forçadas a implementar
-    métodos que não usam. Interfaces pequenas e específicas são melhores que interfaces grandes e genéricas.
+    Entender que COMPOSIÇÃO (ter objetos como propriedades) é mais flexível que HERANÇA (estender classes). Com composição você monta objetos como LEGO, combinando peças de forma livre. Com herança você fica preso a uma hierarquia rígida.
 ";
 
 $testes = [
-    "1 Funcionário: Carlos (salário R$ 3000, 30 dias férias, 160h trabalhadas)",
-    "1 Freelancer: Ana (R$ 80/hora, trabalhou 120 horas no mês)",
-    "1 Voluntário: João (causa: Proteção Animal)",
-    "1 Estagiário: Maria (bolsa R$ 1000, 100h trabalhadas)",
-    "Para cada um, chame trabalhar()",
-    "Para os que recebem: mostre o salário",
-    "Para os que batem ponto: registre entrada e saída",
-    "Para os que tiram férias: tire 10 dias",
-    "Para os que recebem vale: mostre o valor",
+    "carroEsportivo" => [
+        "Marca: Ferrari, Modelo: F8, Ano: 2023",
+        "Motor: gasolina, 720cv, 3900 cilindradas",
+        "Transmissão: automatica, 8 marchas",
+        "Rodas: aro 20, carbono, 4 rodas",
+        "Som: Bang & Olufsen, 1200W, bluetooth true",
+    ],
+    "carroPopular" => [
+        "Marca: Fiat, Modelo: Uno, Ano: 2015",
+        "Motor: gasolina, 75cv, 1000 cilindradas",
+        "Transmissão: manual, 5 marchas",
+        "Rodas: aro 14, ferro, 4 rodas",
+        "Sem som",
+    ],
+    "carroEletrico" => [
+        "Marca: Tesla, Modelo: Model 3, Ano: 2024",
+        "Motor: eletrico, 350cv, 0 cilindradas",
+        "Transmissão: cvt, 1 marcha",
+        "Rodas: aro 19, liga-leve, 4 rodas",
+        "Som: Tesla Audio, 560W, bluetooth true",
+    ],
+    "Exiba especificações completas",
+    "Ligue o motor",
+    "Acelere",
+    "Troque marcha (manual ou automático)",
+    "Toque uma música (se tiver som)",
+    "Freie",
+    "Desligue",
 ];
 
-echo str_pad("  Segregação de Interface  ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
+echo str_pad("  Composição vs Herança  ", 50, "=-", STR_PAD_BOTH) . PHP_EOL;
 
-$func = new Funcionario(3000.0, "TI", 30, 160, "Pereira", "12345678910");
-$freelancer = new Freelancer("Ana", 80, 120);
-$voluntario = new Voluntario("João", "Proteção Animal");
-$estagiario = new Estagiario("Maria", 1000.0, 100);
+$carroEsportivo = new CarroBase(
+    "Ferrari",
+    "F8",
+    2023,
+    new Motor(TipoMotor::Gasolina, 720, 3900),
+    new Transmissao(TipoTransmissao::Automatico, 8),
+    new Rodas(20, TipoRodas::Carbono, 4),
+    new SistemaSom("Bang & Olufsen", "1200W", true)
+);
+
+$carroPopular = new CarroBase(
+    "Fiat",
+    "Uno",
+    2015,
+    new Motor(TipoMotor::Gasolina, 75, 1000),
+    new Transmissao(TipoTransmissao::Manual, 5),
+    new Rodas(14, TipoRodas::Ferro, 4),
+    null
+);
+
+$carroEletrico = new CarroBase(
+    "Tesla",
+    "Model 3",
+    2024,
+    new Motor(TipoMotor::Eletrico, 350, 0),
+    new Transmissao(TipoTransmissao::CVT, 1),
+    new Rodas(19, TipoRodas::LigaLeve, 4),
+    new SistemaSom("Tesla Audio", "560W", true)
+);
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($func->trabalhar());
-dump($freelancer->trabalhar());
-dump($voluntario->trabalhar());
-dump($estagiario->trabalhar());
+dump($carroEsportivo->info());
+dump($carroPopular->info());
+dump($carroEletrico->info());
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($func->receberSalario());
-dump($freelancer->receberSalario());
-dump($estagiario->receberSalario());
+dump($carroEsportivo->ligar());
+dump($carroPopular->ligar());
+dump($carroEletrico->ligar());
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($func->baterPonto(BatidaPonto::Entrada));
-dump($func->baterPonto(BatidaPonto::Saida));
-dump($estagiario->baterPonto(BatidaPonto::Entrada));
-dump($estagiario->baterPonto(BatidaPonto::Saida));
+dump($carroEsportivo->trocarMarcha(5));
+dump($carroPopular->trocarMarcha(1));
+dump($carroPopular->trocarMarcha(7));
+dump($carroEletrico->trocarMarcha(2));
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($func->tirarFerias(10));
+dump($carroEsportivo->tocarMusica("Fur Elise"));
+dump($carroPopular->tocarMusica("Garota de Ipanema"));
+dump($carroEletrico->tocarMusica("Bohemian Rhapsody"));
 
 echo str_repeat("=", 50) . PHP_EOL;
 
-dump($func->receberValeTransporte());
-dump($estagiario->receberValeTransporte());
+dump($carroEsportivo->frear());
+dump($carroPopular->frear());
+dump($carroEletrico->frear());
+
+echo str_repeat("=", 50) . PHP_EOL;
+
+dump($carroEsportivo->desligar());
+dump($carroPopular->desligar());
+dump($carroEletrico->desligar());
